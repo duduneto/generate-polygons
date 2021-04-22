@@ -1,0 +1,22 @@
+.canva_container {
+    height: 100vh;
+    width: 100%;
+}
+
+.point_axis {
+    width: 20px;
+    height: 20px;
+    background-color: #000;
+    border-radius: 10px;
+    position: absolute;
+    cursor: move;
+}
+.point_axis:active {
+    cursor: move;
+    background-color: rgb(41, 41, 41);
+}
+.line {
+    height: 1px;
+    background-color: #000;
+    position: absolute;
+}
