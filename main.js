@@ -4,7 +4,7 @@ var ctx = c.getContext("2d");
 
 const widthScreen = 500;
 const heightScreen = 500;
-const amountAxis = 3;
+const amountAxis = 4;
 const pointAxisRadius = 10;
 
 var axis = []
@@ -55,6 +55,9 @@ function generatePointAxis(axisX, axisY, index) {
         document.onmouseup = null;
         document.onmousemove = null;
 
+        pointAxis.style.top = `${e.y - pointAxisRadius}px`;
+        pointAxis.style.left = `${e.x - pointAxisRadius}px`;
+
         const indexOnAxis = e.target.id.split("_")[1];
         axis[indexOnAxis] = { x: e.x, y: e.y }
         generateConnectionPoints();
@@ -83,8 +86,8 @@ function generateConnectionPoints() {
             const nextAxis = axis[i + 1];
             const hypotenuse = Math.sqrt(Math.abs(currentAxis.x - (nextAxis.x - pointAxisRadius)) ** 2 + Math.abs(currentAxis.y - (nextAxis.y - pointAxisRadius)) ** 2);
             line.style.width = `${hypotenuse}px`;
-            line.style.top = `${currentAxis.y + pointAxisRadius}px`;
-            line.style.left = `${currentAxis.x + pointAxisRadius}px`;
+            line.style.top = `${currentAxis.y}px`;
+            line.style.left = `${currentAxis.x}px`;
             line.style.transform = `rotate(${findAngle(currentAxis.x, currentAxis.y, nextAxis.x, nextAxis.y)}deg)`;
             line.style.transformOrigin = "0% 0%"
             // ctx.moveTo(axis[i].x, axis[i].y);
@@ -94,8 +97,8 @@ function generateConnectionPoints() {
             const firstAxis = axis[0];
             const hypotenuse = Math.sqrt(Math.abs(currentAxis.x - firstAxis.x) ** 2 + Math.abs(currentAxis.y - firstAxis.y) ** 2);
             line.style.width = `${hypotenuse}px`;
-            line.style.top = `${currentAxis.y + pointAxisRadius}px`;
-            line.style.left = `${currentAxis.x + pointAxisRadius}px`;
+            line.style.top = `${currentAxis.y}px`;
+            line.style.left = `${currentAxis.x}px`;
             line.style.transform = `rotate(${findAngle(currentAxis.x, currentAxis.y, firstAxis.x, firstAxis.y)}deg)`;
             line.style.transformOrigin = "0% 0%"
             // ctx.moveTo(axis[i].x, axis[i].y);
