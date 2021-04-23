@@ -7,7 +7,24 @@ const heightScreen = 500;
 const amountAxis = 4;
 const pointAxisRadius = 10;
 
-var axis = []
+var axis = [
+    // {
+    //     x: 487,
+    //     y: 444
+    // },
+    // {
+    //     x: 18,
+    //     y: 276
+    // },
+    // {
+    //     x: 64,
+    //     y: 352
+    // },
+    // {
+    //     x: 370,
+    //     y: 496
+    // }
+]
 
 // ctx.moveTo(randomX, randomY);
 // ctx.lineTo(50, 100);
@@ -21,8 +38,8 @@ function generatePointAxis(axisX, axisY, index) {
     const pointAxis = document.createElement('div');
     pointAxis.classList.add('point_axis');
     pointAxis.id = `axis_${index}`;
-    pointAxis.style.top = `${axisY}px`;
-    pointAxis.style.left = `${axisX}px`;
+    pointAxis.style.top = `${axisY - pointAxisRadius}px`;
+    pointAxis.style.left = `${axisX - pointAxisRadius}px`;
     pointAxis.draggable = true;
     containerCanva.appendChild(pointAxis);
 
@@ -67,6 +84,8 @@ function generatePointAxis(axisX, axisY, index) {
 for (let i = 0; i < amountAxis; i++) {
     const randomY = Math.floor(Math.random() * heightScreen);
     const randomX = Math.floor(Math.random() * widthScreen);
+    // const randomY = axis[i].y;
+    // const randomX = axis[i].x;
     generatePointAxis(randomX, randomY, i);
     axis.push({ x: randomX, y: randomY });
 }
@@ -84,8 +103,8 @@ function generateConnectionPoints() {
         if (!!axis[i + 1]) {
             const currentAxis = axis[i];
             const nextAxis = axis[i + 1];
-            const hypotenuse = Math.sqrt(Math.abs(currentAxis.x - (nextAxis.x - pointAxisRadius)) ** 2 + Math.abs(currentAxis.y - (nextAxis.y - pointAxisRadius)) ** 2);
-            line.style.width = `${hypotenuse}px`;
+            const hypotenuse = Math.sqrt(Math.abs(currentAxis.x - (nextAxis.x)) ** 2 + Math.abs(currentAxis.y - (nextAxis.y)) ** 2);
+            line.style.width = `${hypotenuse + 1}px`;
             line.style.top = `${currentAxis.y}px`;
             line.style.left = `${currentAxis.x}px`;
             line.style.transform = `rotate(${findAngle(currentAxis.x, currentAxis.y, nextAxis.x, nextAxis.y)}deg)`;
@@ -96,10 +115,10 @@ function generateConnectionPoints() {
             const currentAxis = axis[i];
             const firstAxis = axis[0];
             const hypotenuse = Math.sqrt(Math.abs(currentAxis.x - firstAxis.x) ** 2 + Math.abs(currentAxis.y - firstAxis.y) ** 2);
-            line.style.width = `${hypotenuse}px`;
+            line.style.width = `${hypotenuse + 1}px`;
             line.style.top = `${currentAxis.y}px`;
             line.style.left = `${currentAxis.x}px`;
-            line.style.transform = `rotate(${findAngle(currentAxis.x, currentAxis.y, firstAxis.x, firstAxis.y)}deg)`;
+            line.style.transform = `rotate(${findAngle(currentAxis.x , currentAxis.y, firstAxis.x, firstAxis.y)}deg)`;
             line.style.transformOrigin = "0% 0%"
             // ctx.moveTo(axis[i].x, axis[i].y);
             // ctx.lineTo(axis[0].x, axis[0].y);
